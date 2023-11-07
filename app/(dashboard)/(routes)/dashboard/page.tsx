@@ -4,7 +4,6 @@ import {
   BadgeDollarSign,
   ClipboardCheck,
   ShoppingBag,
-  SmartphoneCharging,
   UserPlus2,
 } from "lucide-react";
 import { Overview } from "@/components/dashboard/bar-chart";

@@ -1,14 +1,10 @@
 "use client";
-import { BillboardForm } from "@/components/billboard/billboard-form";
 import CreateBillboard from "@/components/billboard/create";
-import { BillboardField } from "@/components/billboard/field";
 import UpdateBillboard from "@/components/billboard/update";
-import { CreateUpdateForm } from "@/components/create-update-form";
 import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
-import { Doc, Id } from "@/convex/_generated/dataModel";
+import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
-import { z } from "zod";
 
 const BillboardPage = ({
   params,
