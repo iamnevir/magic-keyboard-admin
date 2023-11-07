@@ -48,7 +48,7 @@ const DashboardPage = () => {
           <span className="text-xs text-muted-foreground">Sales Summary</span>
           <div className="flex items-center gap-4 mt-5">
             {sales.map((item) => (
-              <SaleCard data={item} />
+              <SaleCard key={item.label} data={item} />
             ))}
           </div>
         </div>
