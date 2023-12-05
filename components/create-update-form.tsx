@@ -40,15 +40,6 @@ import { SingleImageDropzone } from "./single-image-dropzone";
 import { useEdgeStore } from "@/lib/edgestore";
 import { Checkbox } from "./ui/checkbox";
 import { OptionFormModal } from "./orders/option-form";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "./ui/table";
 import { Card, CardContent } from "./ui/card";
 import Editor from "./editor";
 import slugify from "react-slugify";
@@ -116,9 +107,6 @@ export function CreateUpdateForm<
           create(data);
         }
 
-        if (formName === "Orders") {
-          const quantity = data.orderItems.map((item: any) => item.quantity);
-        }
         if (formName === "Posts") {
           const content =
             "getJSON" in data.content &&

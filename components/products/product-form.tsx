@@ -51,7 +51,6 @@ import { cn, formatDate } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
 import { MultiFileDropzoneUsage } from "./upload-image";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { usePreventUserFromErasingContent } from "@/hooks/use-leave-page-confirmation";
 import { OptionForm } from "./option-form";
 import slugify from "react-slugify";
 import Editor from "../editor";
@@ -247,8 +246,6 @@ export function ProductForm({
     }
   };
   const collections = useQuery(api.collection.getCollections);
-  const [formChanged, setFormChanged] = useState(false);
-  usePreventUserFromErasingContent(formChanged);
 
   return (
     <>
@@ -273,11 +270,7 @@ export function ProductForm({
       </div>
       <Separator />
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 mt-2"
-          onChange={() => setFormChanged(true)}
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-2">
           <>
             <div className="flex ">
               <div className="space-y-8 px-6">
