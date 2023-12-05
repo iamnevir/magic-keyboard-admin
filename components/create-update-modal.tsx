@@ -124,8 +124,7 @@ export function CreateUpdateModal<
     setOpen(!open);
     router.push(`/${formName.toLowerCase()}`);
   };
-  const categories =
-    formName === "Collections" ? useQuery(api.category.getCategories) : null;
+  const categories = useQuery(api.category.getCategories);
   useEffect(() => {
     setOpen(true);
   }, []);

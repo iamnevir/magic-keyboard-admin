@@ -153,7 +153,7 @@ const MultiFileDropzone = React.forwardRef<HTMLInputElement, InputProps>(
           <div className="grid grid-cols-4 gap-x-10 gap-y-4">
             {value?.length! <= 0 && imageUploaded
               ? imageUploaded.slice(0, -1).map((item, index) => (
-                  <div className=" relative">
+                  <div key={index} className=" relative">
                     <div
                       key={index}
                       className="flex w-[270px] h-[200px] items-start rounded-md relative"

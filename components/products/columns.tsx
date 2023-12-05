@@ -1,6 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 
 import { Id } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
@@ -50,12 +50,7 @@ export const ProductsColumns: ColumnDef<ProductsColumn>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => {
-      const collection = useQuery(api.collection.getCollectionById, {
-        collectionId: row.original.collectionId,
-      });
-      return <div className="ml-4">{collection?.name}</div>;
-    },
+    cell: ({ row }) => <CollectionId row={row} />,
   },
   {
     accessorKey: "producer",
@@ -200,3 +195,10 @@ export const ProductsColumns: ColumnDef<ProductsColumn>[] = [
     },
   },
 ];
+
+const CollectionId = ({ row }: { row: Row<ProductsColumn> }) => {
+  const collection = useQuery(api.collection.getCollectionById, {
+    collectionId: row.original.collectionId,
+  });
+  return <div className="ml-4">{collection?.name}</div>;
+};

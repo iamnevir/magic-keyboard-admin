@@ -1,6 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 
 import { Id } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
@@ -106,57 +106,7 @@ export const OrderColumns: ColumnDef<OrderColumn>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => {
-      const [open, setOpen] = useState(false);
-      const checkout = useQuery(api.checkout.getcheckoutByOrder, {
-        orderId: row.original._id,
-      });
-      if (!row.original.isPaid && checkout) {
-        return (
-          <>
-            <ImageModal
-              open={open}
-              setOpen={setOpen}
-              orderId={row.original._id}
-            />
-            {checkout.accept ? (
-              <Badge
-                onClick={() => setOpen(true)}
-                className="bg-green-500 cursor-pointer"
-              >
-                {"Đã thanh toán"}
-              </Badge>
-            ) : (
-              <Badge
-                onClick={() => setOpen(true)}
-                className="bg-yellow-500 cursor-pointer"
-              >
-                {"Yêu cầu thanh toán"}
-              </Badge>
-            )}
-          </>
-        );
-      }
-      if (row.original.isPaid) {
-        return (
-          <>
-            <ImageModal
-              open={open}
-              setOpen={setOpen}
-              orderId={row.original._id}
-            />
-            <Badge
-              onClick={() => setOpen(true)}
-              className="bg-green-500 cursor-pointer"
-            >
-              {"Đã thanh toán"}
-            </Badge>
-          </>
-        );
-      } else {
-        return <Badge variant="destructive">{"Chưa thanh toán"}</Badge>;
-      }
-    },
+    cell: ({ row }) => <IsPaid row={row} />,
   },
   {
     accessorKey: "orderStatus",
@@ -213,3 +163,47 @@ export const OrderColumns: ColumnDef<OrderColumn>[] = [
     },
   },
 ];
+
+const IsPaid = ({ row }: { row: Row<OrderColumn> }) => {
+  const [open, setOpen] = useState(false);
+  const checkout = useQuery(api.checkout.getcheckoutByOrder, {
+    orderId: row.original._id,
+  });
+  if (!row.original.isPaid && checkout) {
+    return (
+      <>
+        <ImageModal open={open} setOpen={setOpen} orderId={row.original._id} />
+        {checkout.accept ? (
+          <Badge
+            onClick={() => setOpen(true)}
+            className="bg-green-500 cursor-pointer"
+          >
+            {"Đã thanh toán"}
+          </Badge>
+        ) : (
+          <Badge
+            onClick={() => setOpen(true)}
+            className="bg-yellow-500 cursor-pointer"
+          >
+            {"Yêu cầu thanh toán"}
+          </Badge>
+        )}
+      </>
+    );
+  }
+  if (row.original.isPaid) {
+    return (
+      <>
+        <ImageModal open={open} setOpen={setOpen} orderId={row.original._id} />
+        <Badge
+          onClick={() => setOpen(true)}
+          className="bg-green-500 cursor-pointer"
+        >
+          {"Đã thanh toán"}
+        </Badge>
+      </>
+    );
+  } else {
+    return <Badge variant="destructive">{"Chưa thanh toán"}</Badge>;
+  }
+};
