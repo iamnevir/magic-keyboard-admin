@@ -13,112 +13,112 @@ export default defineSchema({
   }).index("by_producer", ["producer"]),
   category: defineTable({
     name: v.string(),
-    collections: v.optional(v.array(v.id("collection"))),
+    imageUrl: v.optional(v.string()),
+    slug: v.optional(v.string()),
+    description: v.optional(v.string()),
   }).index("by_name", ["name"]),
   collection: defineTable({
     name: v.string(),
     categoryId: v.id("category"),
-    products: v.optional(v.array(v.id("product"))),
+    slug: v.optional(v.string()),
+    description: v.optional(v.string()),
   }).index("by_category", ["categoryId"]),
+
   product: defineTable({
     name: v.string(),
+    slug: v.optional(v.string()),
     producer: v.optional(v.string()),
-    description: v.optional(v.string()),
-    productDetail: v.union(
-      v.id("product_keyboard"),
-      v.id("product_switch"),
-      v.id("product_keycap")
-    ),
+    description: v.optional(v.any()),
+    infomation: v.optional(v.any()),
+    price: v.optional(v.number()),
+    isSale: v.optional(v.boolean()),
+    salePrice: v.optional(v.number()),
+    timeSale: v.optional(v.number()),
+    pay: v.optional(v.string()),
+    quantity: v.optional(v.number()),
     collectionId: v.id("collection"),
-  }).index("by_collection", ["collectionId"]),
-  product_keyboard: defineTable({
+    options: v.optional(
+      v.array(
+        v.object({
+          name: v.string(),
+          option: v.array(
+            v.object({
+              name: v.string(),
+              image: v.optional(v.string()),
+              price: v.optional(v.number()),
+              quantity: v.optional(v.number()),
+            })
+          ),
+        })
+      )
+    ),
+    images: v.optional(v.array(v.string())),
+    isPublish: v.boolean(),
+  }).index("by_category", ["collectionId"]),
+  review: defineTable({
     productId: v.id("product"),
-    price: v.optional(v.float64()),
-    quantity: v.int64(),
-    layout: v.optional(
-      v.array(
-        v.object({
-          name: v.string(),
-          price: v.float64(),
-          image: v.id("image"),
-        })
-      )
-    ),
-    keycap: v.optional(
-      v.array(
-        v.object({
-          name: v.string(),
-          price: v.float64(),
-          image: v.id("image"),
-        })
-      )
-    ),
-    switch: v.optional(
-      v.array(
-        v.object({
-          name: v.string(),
-          price: v.float64(),
-          image: v.id("image"),
-        })
-      )
-    ),
-    color: v.optional(
-      v.array(
-        v.object({
-          name: v.string(),
-          price: v.float64(),
-          image: v.id("image"),
-        })
-      )
-    ),
+    userName: v.optional(v.string()),
+    email: v.string(),
+    rating: v.number(),
+    title: v.optional(v.string()),
+    comments: v.string(),
+    images: v.optional(v.array(v.string())),
+    like: v.optional(v.number()),
+    dislike: v.optional(v.number()),
   }).index("by_productId", ["productId"]),
-  product_switch: defineTable({
-    productId: v.id("product"),
-    price: v.optional(v.float64()),
-    quantity: v.int64(),
-    option: v.optional(
-      v.array(
-        v.object({
-          name: v.string(),
-          price: v.float64(),
-          image: v.id("image"),
-        })
-      )
-    ),
-    weight: v.optional(
-      v.array(
-        v.object({
-          name: v.string(),
-          price: v.float64(),
-        })
-      )
-    ),
-  }).index("by_productId", ["productId"]),
-  product_keycap: defineTable({
-    productId: v.id("product"),
-    price: v.optional(v.float64()),
-    quantity: v.int64(),
-    option: v.optional(
-      v.array(
-        v.object({
-          name: v.string(),
-          price: v.float64(),
-          image: v.id("image"),
-        })
-      )
-    ),
-  }).index("by_productId", ["productId"]),
-  image: defineTable({
-    url: v.string(),
-    productId: v.string(),
-  }).index("by_product", ["productId"]),
-  orderItem: defineTable({
-    productId: v.id("product"),
-  }).index("by_product", ["productId"]),
   order: defineTable({
-    items: v.array(v.id("orderItem")),
+    userId: v.optional(v.string()),
     phone: v.string(),
+    name: v.string(),
     address: v.string(),
+    payment: v.string(),
+    totalPrice: v.number(),
     isPaid: v.boolean(),
-  }).index("by_user_phone", ["phone"]),
+    code: v.string(),
+    orderStatus: v.optional(v.string()),
+    orderItems: v.array(
+      v.object({
+        product: v.id("product"),
+        image: v.optional(v.string()),
+        quantity: v.number(),
+        price: v.number(),
+        option: v.string(),
+      })
+    ),
+  }).index("by_phone", ["phone"]),
+  music: defineTable({
+    name: v.string(),
+    url: v.string(),
+  }),
+  musicBackground: defineTable({
+    music: v.id("music"),
+  }),
+  post: defineTable({
+    title: v.string(),
+    subTitle: v.optional(v.string()),
+    slug: v.optional(v.string()),
+    type: v.string(),
+    author: v.string(),
+    content: v.optional(v.any()),
+    thumnail: v.string(),
+    isPublish: v.boolean(),
+  }).index("by_type", ["type"]),
+  comment: defineTable({
+    postId: v.id("post"),
+    name: v.string(),
+    email: v.string(),
+    content: v.string(),
+  }).index("by_postId", ["postId"]),
+  voucher: defineTable({
+    code: v.string(),
+    time: v.optional(v.number()),
+    type: v.string(),
+    percent: v.optional(v.number()),
+    price: v.optional(v.number()),
+  }),
+  checkout: defineTable({
+    image: v.id("_storage"),
+    orderId: v.id("order"),
+    accept: v.boolean(),
+  }).index("by_order", ["orderId"]),
 });

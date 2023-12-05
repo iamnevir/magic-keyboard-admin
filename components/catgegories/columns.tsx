@@ -6,15 +6,17 @@ import { Id } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
 import { MenuAction } from "../action-menu";
 import { formatDate } from "@/lib/utils";
+import { SelectBoxRowForColumns } from "../billboard/columns";
 
 export type CategoryColumn = {
   _id: Id<"category">;
   _creationTime: number;
+  imageUrl?: string;
   name: string;
-  collections?: Id<"collection">[];
 };
 
 export const CategoryColumns: ColumnDef<CategoryColumn>[] = [
+  SelectBoxRowForColumns,
   {
     accessorKey: "name",
     header: "Tên danh mục",

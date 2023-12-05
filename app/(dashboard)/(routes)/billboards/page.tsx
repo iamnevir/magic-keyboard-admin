@@ -4,12 +4,20 @@ import {
   BillboardColumns,
 } from "@/components/billboard/columns";
 import { Client } from "@/components/client";
+import SkeletonTable from "@/components/skeleton-table";
 import { api } from "@/convex/_generated/api";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const BillboardsPage = () => {
+  const router = useRouter();
+  const remove = useMutation(api.billboard.removeAll);
   const billboards = useQuery(api.billboard.getBillboard);
-  const formattedCategories: BillboardColumn[] = billboards
+  if (billboards === undefined) {
+    return <SkeletonTable />;
+  }
+  const formattedBillboards: BillboardColumn[] = billboards
     ? billboards.map((item) => ({
         _id: item._id,
         _creationTime: item._creationTime,
@@ -22,11 +30,27 @@ const BillboardsPage = () => {
         isPublish: item.isPublish,
       }))
     : [];
+
+  const onDeleteAll = async (selectedRow: typeof formattedBillboards) => {
+    try {
+      console.log(selectedRow);
+      const ids = selectedRow.map((item) => item._id);
+      console.log(ids);
+      remove({ id: ids });
+
+      router.refresh();
+      toast.success(`Đã xóa toàn bộ dữ liệu.`);
+    } catch (error) {
+      toast.error("Có gì đó sai sai!!!");
+    }
+  };
   const client = Client<BillboardColumn>(
-    formattedCategories,
+    formattedBillboards,
     "Billboards",
     "Các bảng quảng cáo trong cửa hàng của bạn",
-    BillboardColumns
+    BillboardColumns,
+    "producer",
+    onDeleteAll
   );
   return (
     <div className=" w-full px-5">

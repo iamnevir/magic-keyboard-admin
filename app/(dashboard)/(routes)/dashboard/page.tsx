@@ -61,8 +61,8 @@ const DashboardPage = () => {
           />
         </div>
       </div>
-      <div className="flex items-center w-full ml-6 mt-6">
-        <div className=" w-full bg-xam rounded-lg px-3 py-5">
+      <div className="flex items-center w-[90%] ml-6 mt-6">
+        <div className=" w-full dark:bg-xam rounded-lg px-3 py-5">
           <Overview />
         </div>
       </div>

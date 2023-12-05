@@ -13,9 +13,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api";
 import { FunctionReference } from "convex/server";
 import { Doc, TableNames } from "@/convex/_generated/dataModel";
+import { useEdgeStore } from "@/lib/edgestore";
 
 export function MenuAction<T extends TableNames>(
   data: Doc<T>,
@@ -26,10 +26,16 @@ export function MenuAction<T extends TableNames>(
   const remove = useMutation(removeFun);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const { edgestore } = useEdgeStore();
   const onDelete = async () => {
     try {
       setLoading(true);
       remove({ id: data._id });
+      if (name === "billboards") {
+        await edgestore.publicFiles.delete({
+          url: data.imageUrl as string,
+        });
+      }
       router.refresh();
       toast.success("Xóa thành công.");
     } catch (error) {

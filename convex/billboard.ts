@@ -1,4 +1,4 @@
-import { internalQuery, mutation, query } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 export const getBillboard = query({
@@ -64,6 +64,18 @@ export const update = mutation({
     const billboards = await ctx.db.patch(args.id, {
       ...rest,
     });
+    return billboards;
+  },
+});
+export const removeAll = mutation({
+  args: {
+    id: v.array(v.id("billboard")),
+  },
+  handler: async (ctx, args) => {
+    const billboards = args.id.forEach(async (id) => {
+      await ctx.db.delete(id);
+    });
+
     return billboards;
   },
 });

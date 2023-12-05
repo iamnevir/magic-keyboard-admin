@@ -6,15 +6,17 @@ import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { DataTable } from "./data-table";
 import { ColumnDef } from "@tanstack/react-table";
-import { BillboardColumn } from "./billboard/columns";
-
 export function Client<T>(
   data: Array<T>,
   clientName: string,
   description: string,
-  columns: ColumnDef<T>[]
+  columns: ColumnDef<T>[],
+  searchKey: string,
+  deleteAll: (selectedRow: any) => void,
+  isProduct?: boolean
 ) {
   const router = useRouter();
+
   return (
     <>
       <div className="flex items-center justify-between mb-3">
@@ -25,14 +27,25 @@ export function Client<T>(
         <div className="flex items-center py-2">
           <Button
             variant="primary"
-            onClick={() => router.push("/billboards/new")}
+            onClick={() =>
+              router.push(
+                !isProduct
+                  ? `/${clientName.toLowerCase()}/new`
+                  : `/products/new`
+              )
+            }
           >
             Tạo mới
           </Button>
         </div>
       </div>
       <Separator />
-      <DataTable columns={columns} data={data} searchKey="producer" />
+      <DataTable
+        columns={columns}
+        data={data}
+        searchKey={searchKey}
+        deleteAll={deleteAll}
+      />
     </>
   );
 }

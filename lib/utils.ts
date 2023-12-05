@@ -16,3 +16,14 @@ export function formatDate(value: number) {
     return value;
   }
 }
+export function formatDateForm(value: number) {
+  try {
+    return new Date(value);
+  } catch (error) {
+    return value;
+  }
+}
+export const priceFormatter = new Intl.NumberFormat("vi-VN", {
+  style: "currency",
+  currency: "VND",
+});

@@ -5,8 +5,10 @@ import {
   Apple,
   HomeIcon,
   LibraryBig,
+  LucideNewspaper,
   MessageCircle,
   MonitorDot,
+  Receipt,
   ScrollText,
   Settings,
   ShoppingCart,
@@ -17,7 +19,6 @@ import { usePathname } from "next/navigation";
 
 const Navigation = () => {
   const pathname = usePathname();
-  console.log(pathname);
   const routes = [
     {
       href: `/dashboard`,
@@ -38,10 +39,10 @@ const Navigation = () => {
       active: pathname.indexOf("/categories") !== -1,
     },
     {
-      href: `/collection`,
+      href: `/collections`,
       icon: LibraryBig,
-      label: "Collection",
-      active: pathname.indexOf("/collection") !== -1,
+      label: "Collections",
+      active: pathname.indexOf("/collections") !== -1,
     },
     {
       href: `/products`,
@@ -51,17 +52,24 @@ const Navigation = () => {
       active: pathname.indexOf("/products") !== -1,
     },
     {
-      href: `/order`,
+      href: `/orders`,
       icon: ShoppingCart,
       label: "Order",
-      active: pathname.indexOf("/order") !== -1,
+      active: pathname.indexOf("/orders") !== -1,
     },
     {
-      href: `/messages`,
-      icon: MessageCircle,
-      label: "Messages",
-      active: pathname.indexOf("/messages") !== -1,
+      href: `/posts`,
+      icon: LucideNewspaper,
+      label: "Posts",
+      active: pathname.indexOf("/posts") !== -1,
     },
+    {
+      href: `/vouchers`,
+      icon: Receipt,
+      label: "Vouchers",
+      active: pathname.indexOf("/vouchers") !== -1,
+    },
+
     {
       href: `/settings`,
       icon: Settings,
@@ -72,7 +80,7 @@ const Navigation = () => {
   const isMobile = true;
   return (
     <>
-      <div className="h-full fixed flex items-center">
+      <div className="h-full fixed flex items-center z-50">
         <aside className="md:ml-[24px] ml-3 h-full overflow-y-hidden relative flex md:w-[156px] w-88 flex-col gap-4 mt-20">
           <Link href="/dashboard" className="hidden md:flex">
             <Image
@@ -97,9 +105,9 @@ const Navigation = () => {
               <div className="flex items-center gap-2 p-3 ">
                 <route.icon
                   className={cn(
-                    "w-5 h-5  md:group-hover:fill-black md:group-hover:text-black group-hover:fill-[#A9DFD8] group-hover:text-[#A9DFD8]",
+                    "w-5 h-5   md:group-hover:text-black group-hover:fill-[#A9DFD8] group-hover:text-[#A9DFD8]",
                     route.active
-                      ? "md:fill-black md:text-black fill-[#A9DFD8] text-[#A9DFD8]"
+                      ? " md:text-black fill-[#A9DFD8] text-[#A9DFD8]"
                       : ""
                   )}
                 />
