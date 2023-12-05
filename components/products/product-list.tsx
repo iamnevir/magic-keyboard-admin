@@ -1,5 +1,5 @@
 import { api } from "@/convex/_generated/api";
-import { Doc, Id } from "@/convex/_generated/dataModel";
+import { Doc } from "@/convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
 import { ProductsColumn, ProductsColumns } from "./columns";
 import { useRouter } from "next/navigation";

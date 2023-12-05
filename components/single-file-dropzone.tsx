@@ -1,6 +1,6 @@
 "use client";
 
-import { Trash2, UploadCloudIcon, X } from "lucide-react";
+import { Trash2, UploadCloudIcon } from "lucide-react";
 import * as React from "react";
 import { useDropzone, type DropzoneOptions } from "react-dropzone";
 import { twMerge } from "tailwind-merge";

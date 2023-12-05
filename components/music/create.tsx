@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { CreateUpdateForm } from "../create-update-form";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
 import { CreateUpdateModal } from "../create-update-modal";

@@ -13,7 +13,6 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
 } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Table,
   TableBody,
@@ -34,9 +33,7 @@ import { AlertModal } from "./modals/alert-modal";
 import { useState } from "react";
 import {
   AlignHorizontalDistributeCenter,
-  ChevronLeft,
   ChevronLeftIcon,
-  ChevronRight,
   ChevronRightIcon,
   ChevronsLeft,
   ChevronsRight,

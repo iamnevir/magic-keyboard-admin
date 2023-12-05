@@ -1,6 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 
 import { Id } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
@@ -37,12 +37,7 @@ export const CollectionColumns: ColumnDef<CollectionColumn>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => {
-      const category = useQuery(api.category.getCategoryById, {
-        categoryId: row.original.categoryId,
-      });
-      return <div className="ml-4">{category?.name}</div>;
-    },
+    cell: ({ row }) => <CatgeoryCL row={row} />,
   },
   {
     accessorKey: "_creationTime",
@@ -74,3 +69,10 @@ export const CollectionColumns: ColumnDef<CollectionColumn>[] = [
     },
   },
 ];
+
+const CatgeoryCL = ({ row }: { row: Row<CollectionColumn> }) => {
+  const category = useQuery(api.category.getCategoryById, {
+    categoryId: row.original.categoryId,
+  });
+  return <div className="ml-4">{category?.name}</div>;
+};

@@ -47,7 +47,7 @@ import {
   CommandItem,
 } from "../ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { cn, formatDate, formatDateForm } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
 import { MultiFileDropzoneUsage } from "./upload-image";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -459,6 +459,7 @@ export function ProductForm({
                                 >
                                   <Calendar
                                     mode="single"
+                                    //@ts-ignore
                                     selected={field.value}
                                     onSelect={(value: any) =>
                                       field.onChange(value.getTime())

@@ -1,8 +1,6 @@
 "use client";
 
 import {
-  CheckCircleIcon,
-  FileIcon,
   LucideFileWarning,
   Trash2Icon,
   UploadCloudIcon,
@@ -12,9 +10,7 @@ import Image from "next/image";
 import * as React from "react";
 import { useDropzone, type DropzoneOptions } from "react-dropzone";
 import { twMerge } from "tailwind-merge";
-import { Button } from "./ui/button";
 import { useEdgeStore } from "@/lib/edgestore";
-import { url } from "inspector";
 
 const variants = {
   base: "relative rounded-md p-4 w-96 max-w-[calc(100vw-1rem)] flex justify-center items-center flex-col cursor-pointer border border-dashed border-gray-400 dark:border-gray-300 transition-colors duration-200 ease-in-out",

@@ -2,11 +2,7 @@
 
 import { ReactNode } from "react";
 import { ClerkProvider, useAuth } from "@clerk/clerk-react";
-import {
-  Authenticated,
-  ConvexReactClient,
-  Unauthenticated,
-} from "convex/react";
+import { ConvexReactClient } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { dark } from "@clerk/themes";
 

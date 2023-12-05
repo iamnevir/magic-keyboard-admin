@@ -22,8 +22,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
-import { SingleImageDropzone } from "../single-image-dropzone";
-import { useEdgeStore } from "@/lib/edgestore";
 import { Textarea } from "../ui/textarea";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";

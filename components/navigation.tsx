@@ -6,7 +6,6 @@ import {
   HomeIcon,
   LibraryBig,
   LucideNewspaper,
-  MessageCircle,
   MonitorDot,
   Receipt,
   ScrollText,

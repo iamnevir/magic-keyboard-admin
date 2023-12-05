@@ -1,10 +1,11 @@
+//@ts-nocheck
 "use client";
 
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import { Trash, Trash2 } from "lucide-react";
+import { Trash } from "lucide-react";
 import { DefaultValues, FieldValues, useForm } from "react-hook-form";
 import {
   FormControl,

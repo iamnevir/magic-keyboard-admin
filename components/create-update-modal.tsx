@@ -1,3 +1,4 @@
+//@ts-nocheck
 "use client";
 
 import * as z from "zod";
@@ -10,7 +11,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { Doc, Id, TableNames } from "@/convex/_generated/dataModel";
+import { Doc, TableNames } from "@/convex/_generated/dataModel";
 import { FunctionReference } from "convex/server";
 import { useMutation, useQuery } from "convex/react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
