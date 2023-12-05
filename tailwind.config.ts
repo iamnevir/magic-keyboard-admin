@@ -1,6 +1,6 @@
-import { withUt } from "uploadthing/tw";
+import type { Config } from "tailwindcss";
 
-export default withUt({
+const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -17,4 +17,5 @@ export default withUt({
     },
   },
   plugins: [],
-});
+};
+export default config;
